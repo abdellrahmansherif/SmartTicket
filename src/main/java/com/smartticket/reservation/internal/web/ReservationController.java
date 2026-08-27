@@ -27,7 +27,7 @@ public class ReservationController {
     @GetMapping("{id}")
     public ReservationResponse getById(@PathVariable UUID id)
     {
-        return reservationService.getResrvationById(id);
+        return reservationService.getReservationById(id);
     }
 
     // 3. Get current user's reservations

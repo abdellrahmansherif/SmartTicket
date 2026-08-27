@@ -69,7 +69,10 @@ public class PaymentService {
                 gatewayResponse.transactionId()
         );
 
-        return toResponse(savedPayment);
+        return toResponse(
+                savedPayment,
+                gatewayResponse.paymentUrl()
+        );
     }
 
 
@@ -196,8 +199,30 @@ public class PaymentService {
     }
 
 
+    /*
+     * Used by normal GET endpoints.
+     *
+     * The checkout URL only exists when a payment session
+     * is initially created.
+     */
     private PaymentResponse toResponse(
             Payment payment
+    ) {
+
+        return toResponse(
+                payment,
+                null
+        );
+    }
+
+
+    /*
+     * Used when creating a payment and the gateway returns
+     * a checkout/payment URL.
+     */
+    private PaymentResponse toResponse(
+            Payment payment,
+            String checkoutUrl
     ) {
 
         return new PaymentResponse(
@@ -206,7 +231,8 @@ public class PaymentService {
                 payment.getAmount(),
                 payment.getStatus(),
                 payment.getCreatedAt(),
-                payment.getPaidAt()
+                payment.getPaidAt(),
+                checkoutUrl
         );
     }
 }

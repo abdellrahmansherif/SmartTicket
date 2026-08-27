@@ -12,6 +12,7 @@ public record PaymentResponse(
         BigDecimal amount,
         PaymentStatus status,
         Instant createdAt,
-        Instant paidAt
+        Instant paidAt,
+        String paymentUrl
 ) {
 }
