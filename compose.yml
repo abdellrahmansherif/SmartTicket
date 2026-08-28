@@ -1,10 +1,12 @@
 services:
+
   db:
     image: postgres:16-alpine
+    container_name: smartticket-db
 
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-SmartTicket_db}
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
     ports:
@@ -23,9 +25,8 @@ services:
       timeout: 5s
       retries: 10
 
+    restart: unless-stopped
+
+
 volumes:
   postgres_data:
-
-
-
-
