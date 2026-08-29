@@ -44,7 +44,7 @@ public class AuthService {
     {
         if(userRepository.existsByEmailIgnoreCase(request.email()))
         {
-            throw new RuntimeException();
+            throw new EmailAlreadyExistsException();
         }
         User user= User.builder()
                 .email(request.email())
